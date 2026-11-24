@@ -10,8 +10,13 @@ EXCUSE = (
     "It evicted the deadline, the ticket, and, briefly, you."
 )
 
+# Bounty cap: one line, at most 200 characters, no embedded newline.
+MAX_CHARS = 200
+
 
 def main() -> None:
+    assert len(EXCUSE) <= MAX_CHARS, "excuse exceeds the 200-character cap"
+    assert "\n" not in EXCUSE, "excuse must be a single line"
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
